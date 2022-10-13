@@ -47,6 +47,12 @@
                 {% endif %}
             </h4>
 
+            <div>
+                <form action="/cities/{{ city.id }}/delete" method="POST">
+                   <button type="submit">delete</button>
+                </form>  
+             </div>
+
             <h4>Country: {{ city.country.name }}</h4>
         </div>
 
