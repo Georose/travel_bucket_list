@@ -5,13 +5,13 @@ from models.city import City
 
 def save(country):
     sql = """
-    INSERT INTO cities (name, visit, city_id)
-    Values (%s, %s, %s)
+    INSERT INTO countries (name, visit)
+    Values (%s, %s)
     RETURNING *
     """
-    values = [country.name, country.visit, country.city.id]
+    values = [country.name, country.visit]
     results = run_sql(sql, values)
-    id = results [0]["id"]
+    id = results[0]['id']
     country.id = id
     return country
 
@@ -22,7 +22,7 @@ def select_all():
     results = run_sql(sql)
 
     for row in results:
-        country =  Country(row['name'], row['city_id'], row['visit'], row['id'])
+        country =  Country(row['name'], row['visit'], row['id'])
         countries.append(country)
     return countries
 
@@ -33,7 +33,7 @@ def select(id):
     result = run_sql(sql, values)[0]
 
     if result is not None:
-        country = Country(result['name'], result['city_id'], result['visit'], result['id'] )
+        country = Country(result['name'], result['visit'], result['id'] )
     return country
 
 def delete_all():

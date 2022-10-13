@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="containter">
+
+    <form action="/cities" method="post">
+        <div>
+            <label for="city name">City name:</label>
+            <input type="text" id="city name" name="city name" placeholder="City name" required autofocus>
+        </div>
+
+    <div>
+        <label for="visited">Visited</label>
+        <select name="visited" id="visited">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="country">Country</label>
+        <select name="country_id" id="country">
+            {% for country in countries %}
+                <option value="{{ country.id }}">{{ country.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit">Add City</button>
+    
+
+</form>
+
+<h1>All Cities</h1>
+
+<div class="all-cities">
+    {% for city in cities %}
+
+        <div class="city">
+            <h4>City: {{ city.name }}</h4>
+        
+            <h4>Visited:
+                {% if city.visit %}
+                    <span> &#9989 </span>
+                {% else %}
+                    <span> &#10060 </span>
+                {% endif %}
+            </h4>
+
+            <h4>Country: {{ city.country.name }}</h4>
+        </div>
+
+    {% endfor %}
+</div>
+
+</div>
+    
+{% endblock content %}

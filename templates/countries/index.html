@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+   <form action="/countries" method="post">
+      <div>
+         <label for="country name">Country name:</label>
+         <input type="text" id="country name" name="country name" placeholder="Country name" required autofocus> 
+      </div>
+
+
+      <div>
+         <label for="visited">Visited</label>
+         <select name="visited" id="visited">
+            <option value="true">True</option>
+            <option value="false">False</option>
+         </select>
+      </div>
+
+      <button type="submit">Add Country</button>
+
+
+   </form>
+
+   <h1>All countries</h1>
+
+   <div class="all-countries-cities"> 
+      {% for country in countries %}
+            
+         <div class="country-city">
+            <h4>Country: {{ country.name }}</h4>
+          
+            <h4>Visited: 
+               {% if country.visit %}
+                  <span> &#9989 </span>
+               {% else %}
+                  <span> &#10060 </span>
+               {% endif %}
+            </h4>
+
+
+           
+            <h4> <a class="link" href="/countries/{{country.id}}/edit">edit</a></h4>
+
+         </div>      
+       
+
+       
+
+      {% endfor %}
+
+   </div>
+
+
+</div>
+ 
+
+
+
+{% endblock %}
